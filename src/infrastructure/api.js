@@ -1,4 +1,4 @@
-import config from '../../config';
+import config from '../config';
 
 function scope(prefix) {
   const { api: { version } } = config;
@@ -26,4 +26,4 @@ const api = {
   error,
 };
 
-export { api };
+export default api;

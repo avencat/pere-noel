@@ -1,6 +1,6 @@
-import client from '../../db';
-import config from '../../config';
-import { api } from '../infrastructure/api';
+import client from '../db';
+import config from '../config';
+import api from '../infrastructure/api';
 
 const createUser = async (req, res) => {
   try {
@@ -14,7 +14,7 @@ const createUser = async (req, res) => {
       profilePicture,
     } = req.body;
 
-    const { rows: [ user ] } = await client.query(`
+    const { rows: [user] } = await client.query(`
       INSERT INTO
        users(
          firstName,
@@ -29,7 +29,7 @@ const createUser = async (req, res) => {
        VALUES($1, $2, $3, $4, $5, $6, $7, FALSE) RETURNING *
     `, [firstName, lastName, biography, email, sex, age, profilePicture]);
 
-    return api.success(res)(user)
+    return api.success(res)(user);
   } catch (e) {
     config.isDev && console.error(e);
 

@@ -1,7 +1,9 @@
 import express from 'express';
 
-import { api } from '../infrastructure/api';
-import { createUser, getUser, removeUser, updateUser } from '../controllers/user';
+import api from '../infrastructure/api';
+import {
+  createUser, getUser, removeUser, updateUser,
+} from '../controllers/user';
 
 const router = express.Router();
 
