@@ -2,7 +2,8 @@ const env = process.env.NODE_ENV || 'development';
 
 const defaultConfig = {
   port: process.env.PORT || 3000,
-  root: './',
+  root: '../',
+  srcPath: 'src',
   isDev: env === 'development',
   env,
   api: {
@@ -18,6 +19,7 @@ const config = {
   },
   production: {
     ...defaultConfig,
+    srcPath: 'dist',
     db: process.env.DATABASE_URL,
   },
 };

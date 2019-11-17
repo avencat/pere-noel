@@ -18,7 +18,7 @@ var _glob = _interopRequireDefault(require("glob"));
 var _db = _interopRequireDefault(require("./db"));
 
 function loadProject(app, config) {
-  const controllers = _glob.default.sync('routes/*.js');
+  const controllers = _glob.default.sync(`${config.srcPath}/routes/*.js`);
 
   controllers.forEach(file => require(`${config.root}${file}`).default(app));
 }

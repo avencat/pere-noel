@@ -6,7 +6,7 @@ import glob from 'glob';
 import client from './db';
 
 function loadProject(app, config) {
-  const controllers = glob.sync('routes/*.js');
+  const controllers = glob.sync(`${config.srcPath}/routes/*.js`);
   controllers.forEach(file => require(`${config.root}${file}`).default(app));
 }
 
