@@ -17,14 +17,14 @@ const createUser = async (req, res) => {
     const { rows: [user] } = await client.query(`
       INSERT INTO
        users(
-         firstName,
-         lastName,
+         first_name,
+         last_name,
          biography,
          email,
          sex,
          age,
-         profilePicture,
-         isRemoved
+         profile_picture,
+         is_removed
        )
        VALUES($1, $2, $3, $4, $5, $6, $7, FALSE) RETURNING *
     `, [firstName, lastName, biography, email, sex, age, profilePicture]);
@@ -36,6 +36,7 @@ const createUser = async (req, res) => {
     return api.error(res)({
       code: 2,
       message: 'Bad request',
+      column: e.column,
     });
   }
 };
@@ -61,7 +62,7 @@ const removeUser = async (req, res) => {
   const { id } = req.params;
 
   try {
-    await client.query('UPDATE users SET isRemoved = true WHERE id = $1', [id]);
+    await client.query('UPDATE users SET is_removed = true WHERE id = $1', [id]);
 
     return api.success(res)({});
   } catch (e) {
@@ -80,7 +81,7 @@ const updateUser = async (req, res) => {
   try {
     await client.query(`
       UPDATE users
-      SET biography = COALESCE($1, biography), profilePicture = COALESCE($2, profilePicture)
+      SET biography = COALESCE($1, biography), profile_picture = COALESCE($2, profile_picture)
       WHERE id = $1 RETURNING *
     `, [id]);
 
